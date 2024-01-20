@@ -17,6 +17,6 @@ export const GET = async () => {
 
         return NextResponse.json(allUsers, { status: 200 })
     } catch (err) {
-        return NextResponse.json({ message: "Something went wrong!" }, { status: 500 })
+        return NextResponse.json({ error: "Something went wrong!" }, { status: 500 })
     }
 }

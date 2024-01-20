@@ -28,7 +28,7 @@ export const PUT = async (request, { params: { shiftId } }) => {
             where: { id: shiftId }
         })
 
-        if(!shift) return NextResponse.json({ message: "Shift does not exist." }, { status: 404 })
+        if(!shift) return NextResponse.json({ error: "Shift does not exist." }, { status: 404 })
 
         const updatedShift = await db.shift.update({
             data: { ...body },
@@ -37,7 +37,7 @@ export const PUT = async (request, { params: { shiftId } }) => {
 
         return NextResponse.json(updatedShift, { status: 200 })
     } catch (err) {
-        return NextResponse.json({ message: "Something went wrong!" }, { status: 500 })
+        return NextResponse.json({ error: "Something went wrong!" }, { status: 500 })
     }
 }
 
@@ -49,7 +49,7 @@ export const DELETE = async (request, { params: { shiftId } }) => {
             where: { id: shiftId }
         })
 
-        if(!shift) return NextResponse.json({ message: "Shift does not exist." }, { status: 404 })
+        if(!shift) return NextResponse.json({ error: "Shift does not exist." }, { status: 404 })
 
         await db.shift.delete({
             where: { id: shiftId }
@@ -57,6 +57,6 @@ export const DELETE = async (request, { params: { shiftId } }) => {
 
         return NextResponse.json({message: "Shift deleted successfuly!" }, { status: 200 })
     } catch (err) {
-        return NextResponse.json({ message: "Something went wrong!" }, { status: 500 })
+        return NextResponse.json({ error: "Something went wrong!" }, { status: 500 })
     }
 }

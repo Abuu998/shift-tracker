@@ -17,7 +17,7 @@ export const POST = async (request) => {
 
         return NextResponse.json(newShift, { status: 201 })
     } catch (err) {
-        return NextResponse.json({ message: "Something went wrong!" }, { status: 500 })
+        return NextResponse.json({ error: "Something went wrong!" }, { status: 500 })
     }
 }
 
@@ -29,6 +29,6 @@ export const GET = async () => {
 
         return NextResponse.json(allShifts, { status: 200 })
     } catch (err) {
-        return NextResponse.json({ message: "Something went wrong!" }, { status: 500 })
+        return NextResponse.json({ error: "Something went wrong!" }, { status: 500 })
     }
 }
