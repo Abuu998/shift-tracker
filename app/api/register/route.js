@@ -15,7 +15,7 @@ export const POST = async (request) => {
 
         const hashed = await hash(password, 10) 
 
-        const newUser = await db.user.create({
+        await db.user.create({
             data: {
                 name, 
                 email,

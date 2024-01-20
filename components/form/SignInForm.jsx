@@ -4,16 +4,18 @@ import { useState } from "react"
 import Input from "./Input"
 import Label from "./Label"
 import Button from "../Button"
-import { sanitizeData, signupUser } from "@/utilities/utils"
+import { signIn } from "next-auth/react"
+import FormDivider from "../FormDivider"
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
 import { useRouter } from "next/navigation"
 
 const initialState = {
-    name: "",
     email: "",
     password: ""
 }
 
-function SignUpForm() {
+function SignInForm() {
     const [formData, setFormData] = useState(initialState)
     const [error, setError] = useState("")
     const router = useRouter()
@@ -29,17 +31,20 @@ function SignUpForm() {
     const handleSubmit = async e => {
         e.preventDefault()
 
-        const sanitizedData = sanitizeData(formData)
-        setFormData(initialState)
+        const res = await signIn("credentials", {
+            callbackUrl: "http://localhost:3000/",
+            redirect: false,
+            email: formData.email,
+            password: formData.password
+        })
 
-        const res = await signupUser(sanitizedData)
-
-        if(!res?.message){
-            setError(res.response?.data?.error)
+        if(!res.ok) {
+            setError("Something went wrong.")
         } else {
-            router.replace("/signin")
-            router.refresh()
+            router.replace("/")
         }
+
+        setFormData(initialState)
     }
 
     return (
@@ -49,19 +54,6 @@ function SignUpForm() {
         >
             <div className="flex flex-col gap-4">
                 {error && <p className="text-sm text-red-400">{error}</p>}
-                
-                <Label label="Name" labelStyle="font-semibold">
-                    <Input
-                        className="py-2 px-4 bg-slate-950 rounded-md focus:outline-none focus:outline-blue-500"
-                        type="text"
-                        name="name"
-                        placeholder="i.e: John Doe"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        autoFocus
-                    />
-                </Label>
                 <Label label="Email" labelStyle="font-semibold">
                     <Input
                         className="py-2 px-4 bg-slate-950 rounded-md focus:outline-none focus:outline-blue-500"
@@ -87,12 +79,35 @@ function SignUpForm() {
             </div>
             <Button 
                 type="submit"
-                className="py-2 px-6 bg-blue-500 hover:bg-blue-600 rounded-md"
+                className="py-2 px-6 bg-blue-500 hover:bg-blue-600 rounded-md font-medium"
             >
-                Signup
+                Signin
             </Button>
+            <FormDivider />
+            <div className="flex flex-col gap-4">
+                <Button 
+                    type="button"
+                    className="py-2 px-6 bg-slate-100 hover:bg-slate-200 text-slate-950 rounded-md flex items-center justify-center gap-4"
+                    onClick={() => signIn("google", { callbackUrl: 'http://localhost:3000/' })}
+                >
+                    <span className="text-xl">
+                        <FcGoogle />
+                    </span>
+                    <span className="font-medium">Signin with Google</span>
+                </Button>
+                <Button 
+                    type="button"
+                    className="py-2 px-6 bg-slate-950 hover:bg-slate-800 text-slate-100 rounded-md flex items-center justify-center gap-4"
+                    onClick={() => signIn("github", { callbackUrl: 'http://localhost:3000/' })}
+                >
+                    <span className="text-xl">
+                        <FaGithub />
+                    </span>
+                    <span className="font-medium">Signin with Github</span>
+                </Button>
+            </div>
         </form>
     )
 }
 
-export default SignUpForm
+export default SignInForm
