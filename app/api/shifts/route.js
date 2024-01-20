@@ -1,0 +1,34 @@
+import { NextResponse } from "next/server";
+import db from "@/prisma";
+import { connectToDb } from "@/utilities/db";
+
+// CREATE NEW SHIFT
+export const POST = async (request) => {
+    try {
+        const { workerId } = await request.json()
+
+        await connectToDb()
+
+        const newShift = await db.shift.create({
+            data: {
+                workerId
+            }
+        })
+
+        return NextResponse.json(newShift, { status: 201 })
+    } catch (err) {
+        return NextResponse.json({ message: "Something went wrong!" }, { status: 500 })
+    }
+}
+
+export const GET = async () => {
+    try {
+        await connectToDb()
+
+        const allShifts = await db.shift.findMany()
+
+        return NextResponse.json(allShifts, { status: 200 })
+    } catch (err) {
+        return NextResponse.json({ message: "Something went wrong!" }, { status: 500 })
+    }
+}

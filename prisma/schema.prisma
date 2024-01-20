@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mongodb"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+    id       String  @id @default(auto()) @map("_id") @db.ObjectId
+    name     String
+    email    String  @unique
+    image    String?
+    password String?
+    Shift    Shift[]
+
+    @@map("users")
+}
+
+model Shift {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    start     String?
+    end       String?
+    status    Status   @default(YET_TO_START)
+    worker    User     @relation(fields: [workerId], references: [id], onDelete: Cascade)
+    workerId  String   @db.ObjectId
+
+    @@map("shifts")
+}
+
+enum Status {
+    YET_TO_START
+    IN_PROGRESS
+    ENDED
+}

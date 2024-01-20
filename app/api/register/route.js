@@ -1,0 +1,30 @@
+import { NextResponse } from "next/server";
+import db from "@/prisma";
+import { connectToDb } from "@/utilities/db";
+import { hash } from "bcrypt";
+
+export const POST = async (request) => {
+    try {
+        const { name, email, password } = await request.json()
+
+        await connectToDb()
+
+        const existUser = await db.user.findUnique({ where: { email } })
+
+        if(existUser) return NextResponse.json({ message: "Email belongs to another account!" }, { status: 409 })
+
+        const hashed = await hash(password, 10) 
+
+        const newUser = await db.user.create({
+            data: {
+                name, 
+                email,
+                password: hashed
+            }
+        })
+
+        return NextResponse.json({ message: "User created Successfuly" }, { status: 201 })
+    } catch (err) {
+        return NextResponse.json({ message: "Something went wrong!" }, { status: 500 })
+    }
+}

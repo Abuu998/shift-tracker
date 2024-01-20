@@ -1,4 +1,5 @@
 import { Poppins } from "next/font/google";
+import Navbar from "@/components/Navbar";
 import "./globals.css";
 
 const poppins = Poppins({ 
@@ -7,14 +8,15 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-	title: "Work Logs",
-	description: "Log your start and end of shift",
+	title: "Shift Tracker",
+	description: "Track your start and end of shift",
 };
 
 export default function RootLayout({ children }) {
 	return (
 		<html lang="en">
 			<body className={poppins.className}>
+				<Navbar />
 				{children}
 			</body>
 		</html>
