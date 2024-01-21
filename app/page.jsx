@@ -1,8 +1,11 @@
+import Container from "@/components/Container";
 
 export default function Home() {
 	return (
 		<main>
-			<h1>Home page</h1>
+			<Container>
+				<h1>Home page</h1>
+			</Container>
 		</main>
 	);
 }

@@ -55,37 +55,6 @@ export const authOptions = {
         }),
     ],
     callbacks: {
-        async signIn({ profile }) {
-            console.log("STARTING LOG IN")
-            if(!profile) return true
-            
-            console.log("LOG IN WITH auth0 PROVIDERS")
-
-            try {
-                
-                const findUser = await db.user.findUnique({ where: { email: profile.email } })
-
-                if(findUser) return true
-                
-                const saved = await db.user.create({
-                    data: {
-                        name: profile.name,
-                        email: profile.email,
-                        image: profile.image || profile.picture
-                    },
-                    select: {
-                        id: true,
-                        name: true,
-                        email: true,
-                        image: true
-                    }
-                })
-
-            } catch (err) {
-                return false
-            }
-        },
-
         async jwt({ token, user }) {
             if(user) {
                 return {
@@ -99,7 +68,6 @@ export const authOptions = {
 
         async session({ session, token }) {
             session.user.id = token.id
-            console.log({ SESSION_TOKEN: token })
 
             return session
         }
