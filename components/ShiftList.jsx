@@ -2,7 +2,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 import { getServerSession } from "next-auth"
 import RenderShift from "./shift/RenderShift"
 
-const baseUrl = `${process.env.NEXTAUTH_URL}/api`
+const baseUrl = `https://shift-tracker-rust.vercel.app/api`
 
 async function getAllUsersShifts(userId) {
     const res = await fetch(`${baseUrl}/users/${userId}/shifts`, {

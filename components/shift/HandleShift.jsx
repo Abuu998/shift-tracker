@@ -3,7 +3,7 @@
 import Button from "../Button"
 import { useRouter } from "next/navigation"
 
-const baseUrl = `${process.env.NEXTAUTH_URL}/api`
+const baseUrl = `https://shift-tracker-rust.vercel.app/api`
 
 const startShift = async (shiftId) => {
     const res = await fetch(`${baseUrl}/shifts/${shiftId}`, {
