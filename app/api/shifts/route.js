@@ -9,6 +9,10 @@ export const POST = async (request) => {
 
         await connectToDb()
 
+        const findUser = await db.user.findFirst({ where: { id: workerId } })
+
+        if(!findUser) return NextResponse.json({ error: "Unauthorized" }, { status: 403 })
+
         const newShift = await db.shift.create({
             data: {
                 workerId

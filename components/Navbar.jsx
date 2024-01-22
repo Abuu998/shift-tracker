@@ -9,7 +9,7 @@ async function Navbar() {
     const session = await getServerSession(authOptions)
 
     return (
-        <header className="py-4 sticky top-0 border-b border-b-slate-800 border-b-solid">
+        <header className="py-4 sticky top-0 border-b border-b-slate-800 border-b-solid bg-slate-900">
             <Container className="flex justify-between items-center">
                 <Link href="/" className="cursor-pointer">
                     <Logo className="flex items-center gap-4" labelStyles="text-2xl" />
