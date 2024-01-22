@@ -1,4 +1,6 @@
-import axios from "@/axios.config";
+import axios from "axios";
+
+axios.defaults.baseURL = `${process.env.NEXTAUTH_URL}/api`
 
 export const signupUser = async (formData={}) => {
     try {

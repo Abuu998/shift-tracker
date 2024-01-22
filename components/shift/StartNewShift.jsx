@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation"
 import Button from "../Button"
 
 
-const baseUrl = "http://localhost:3000/api"
+const baseUrl = `${process.env.NEXTAUTH_URL}/api`
 
 const startNewShift = async (userId) => {
     const res = await fetch(`${baseUrl}/shifts`, {

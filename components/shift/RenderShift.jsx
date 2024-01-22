@@ -47,15 +47,3 @@ function RenderShift({ shift={} }) {
 }
 
 export default RenderShift
-
-
-
-// {
-//     id: '65ad64bf00725cf4d6238cee',
-//     createdAt: '2024-01-21T18:38:55.138Z',
-//     updatedAt: '2024-01-21T18:38:55.138Z',
-//     start: null,
-//     end: null,
-//     status: 'YET_TO_START',
-//     workerId: '65ad06ce365a0b78446e40c6'
-// }

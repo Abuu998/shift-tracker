@@ -32,7 +32,7 @@ function SignInForm() {
         e.preventDefault()
 
         const res = await signIn("credentials", {
-            callbackUrl: "http://localhost:3000/",
+            callbackUrl: process.env.NEXTAUTH_URL,
             redirect: true,
             email: formData.email,
             password: formData.password
@@ -89,7 +89,7 @@ function SignInForm() {
                 <Button 
                     type="button"
                     className="py-2 px-6 bg-slate-100 hover:bg-slate-200 text-slate-950 rounded-md flex items-center justify-center gap-4"
-                    onClick={() => signIn("google", { callbackUrl: 'http://localhost:3000/' })}
+                    onClick={() => signIn("google", { callbackUrl: process.env.NEXTAUTH_URL })}
                 >
                     <span className="text-xl">
                         <FcGoogle />
@@ -99,7 +99,7 @@ function SignInForm() {
                 <Button 
                     type="button"
                     className="py-2 px-6 bg-slate-950 hover:bg-slate-800 text-slate-100 rounded-md flex items-center justify-center gap-4"
-                    onClick={() => signIn("github", { callbackUrl: 'http://localhost:3000/' })}
+                    onClick={() => signIn("github", { callbackUrl: process.env.NEXTAUTH_URL })}
                 >
                     <span className="text-xl">
                         <FaGithub />

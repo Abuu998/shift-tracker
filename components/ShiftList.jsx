@@ -2,7 +2,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 import { getServerSession } from "next-auth"
 import RenderShift from "./shift/RenderShift"
 
-export const baseUrl = "http://localhost:3000/api"
+const baseUrl = `${process.env.NEXTAUTH_URL}/api`
 
 async function getAllUsersShifts(userId) {
     const res = await fetch(`${baseUrl}/users/${userId}/shifts`, {
