@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = `${process.env.NEXTAUTH_URL}/api`
+axios.defaults.baseURL = `https://shift-tracker-rust.vercel.app/api`
 
 export const signupUser = async (formData={}) => {
     try {
