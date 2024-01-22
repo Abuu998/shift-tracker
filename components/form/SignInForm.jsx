@@ -33,7 +33,7 @@ function SignInForm() {
 
         const res = await signIn("credentials", {
             callbackUrl: "http://localhost:3000/",
-            redirect: false,
+            redirect: true,
             email: formData.email,
             password: formData.password
         })
@@ -42,6 +42,7 @@ function SignInForm() {
             setError("Something went wrong.")
         } else {
             router.replace("/")
+            router.refresh()
         }
 
         setFormData(initialState)
