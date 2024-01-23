@@ -7,16 +7,15 @@ import Loader from "./Loader"
 function DisplayDateTime({ children }) {
     const [mounted, setMounted] = useState(false)
 
-    if(!mounted) return <Loader />
-
-
     useEffect(() => {
         setMounted(true)
     }, [])
 
+    if(!mounted) return <Loader />
+    
     return (
-        <Suspense>
-            { children }
+        <Suspense fallback={<Loader />}>
+            { mounted && children }
         </Suspense>
     )
 }
