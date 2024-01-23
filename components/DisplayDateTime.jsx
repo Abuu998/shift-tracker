@@ -10,12 +10,10 @@ function DisplayDateTime({ children }) {
     useEffect(() => {
         setMounted(true)
     }, [])
-
-    if(!mounted) return <Loader />
     
     return (
-        <Suspense fallback={<Loader />}>
-            { mounted && children }
+        <Suspense key={mounted ? "locale" : "utc"}>
+            { children }
         </Suspense>
     )
 }
