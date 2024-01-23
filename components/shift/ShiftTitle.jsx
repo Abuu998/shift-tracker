@@ -3,6 +3,7 @@
 import useToggle from "@/hooks/useToggle";
 import { formatDate } from "@/utilities/utils"
 import { BsCaretDownFill, BsCaretRightFill } from "react-icons/bs";
+import DisplayDateTime from "../DisplayDateTime";
 
 function ShiftTitle({ shift={} }) {
     const [on, toggleOn] = useToggle({ initialValue: false })
@@ -11,7 +12,9 @@ function ShiftTitle({ shift={} }) {
         <div className="flex items-center justify-between font-semibold">
             <div className="flex items-center gap-4 cursor-pointer transition-all" onClick={() => toggleOn()}>
                 { on ? <BsCaretDownFill className="text-2xl" /> : <BsCaretRightFill className="text-2xl" /> }
-                <span className="font-semibold">{formatDate(shift.createdAt)}</span>
+                <DisplayDateTime>
+                    <span className="font-semibold">{formatDate(shift.createdAt)}</span>
+                </DisplayDateTime>
             </div>
             {
                 !on && <div className="flex items-center gap-4 text-sm">

@@ -3,6 +3,7 @@ import Toggle from "../toggle"
 import ShiftTitle from "./ShiftTitle";
 import HandleShift from "./HandleShift";
 import DeleteShift from "./DeleteShift";
+import DisplayDateTime from "../DisplayDateTime";
 
 
 function RenderShift({ shift={} }) {
@@ -17,14 +18,18 @@ function RenderShift({ shift={} }) {
                     <span className="flex items-center justify-between">
                         <span className="flex items-center gap-6">
                             <span className="font-medium text-blue-400">Starting:</span>
-                            <span>{shift.start ? formatHours(shift.start) : "Not started" }</span>
+                            <DisplayDateTime>
+                                <span>{shift.start ? formatHours(shift.start) : "Not started" }</span>
+                            </DisplayDateTime>
                         </span>
                         {!shift?.start && <HandleShift shift={shift} label="Start Shift" />}
                     </span>
                     <span className="flex items-center justify-between">
                         <span className="flex items-center gap-6">
                             <span className="font-medium text-blue-400">End:</span>
-                            <span>{shift?.end ? formatHours(shift.end) : "Not started" }</span>
+                            <DisplayDateTime>
+                                <span>{shift?.end ? formatHours(shift.end) : "Not started" }</span>
+                            </DisplayDateTime>
                         </span>
                         {(shift?.start && !shift?.end) && <HandleShift shift={shift} label="End Shift" />}
                     </span>

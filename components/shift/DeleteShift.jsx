@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation"
 import Button from "../Button"
 
 const baseUrl = `https://shift-tracker-rust.vercel.app/api`
+// const baseUrl = `http://localhost:3000/api`
 
 const deleteShift = async shiftId => {
     const res = await fetch(`${baseUrl}/shifts/${shiftId}`, {
