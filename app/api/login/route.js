@@ -26,17 +26,17 @@ export const POST = async (req) => {
         }
 
         const accessToken = generateAccessToken(userPayload)
-        const refreshToken = generateRefreshToken(userPayload)
+        // const refreshToken = generateRefreshToken(userPayload)
 
-        await db.user.update({
-            data: {
-                ...user,
-                refreshToken
-            },
-            where: {
-                email: user.email
-            }
-        })
+        // await db.user.update({
+        //     data: {
+        //         ...user,
+        //         refreshToken
+        //     },
+        //     where: {
+        //         email: user.email
+        //     }
+        // })
 
         const returnedUser = {
             id: user.id,

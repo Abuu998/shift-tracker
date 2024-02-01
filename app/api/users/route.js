@@ -11,7 +11,6 @@ export const GET = async () => {
             name: true,
             email: true,
             image: true,
-            refreshToken: true
         }
 
         const allUsers = await db.user.findMany({
