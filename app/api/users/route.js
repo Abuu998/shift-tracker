@@ -6,14 +6,14 @@ export const GET = async () => {
     try {
         await connectToDb()
 
-        const allUsers = await db.user.findMany({
-            select: {
-                id: true,
-                name: true,
-                email: true,
-                image: true
-            }
-        })
+        const select = {
+            id: true,
+            name: true,
+            email: true,
+            image: true
+        }
+
+        const allUsers = await db.user.findMany()
 
         return NextResponse.json({ data: allUsers, success: true }, { status: 200 })
     } catch (err) {
