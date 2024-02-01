@@ -11,7 +11,7 @@ export const POST = async (request) => {
 
         const findUser = await db.user.findFirst({ where: { id: workerId } })
 
-        if(!findUser) return NextResponse.json({ error: "Unauthorized" }, { status: 403 })
+        if(!findUser) return NextResponse.json({ error: "Unauthorized", success: false }, { status: 403 })
 
         const newShift = await db.shift.create({
             data: {
@@ -19,9 +19,9 @@ export const POST = async (request) => {
             }
         })
 
-        return NextResponse.json(newShift, { status: 201 })
+        return NextResponse.json({ data: newShift, success: true }, { status: 201 })
     } catch (err) {
-        return NextResponse.json({ error: "Something went wrong!" }, { status: 500 })
+        return NextResponse.json({ error: "Something went wrong!", success: false }, { status: 500 })
     }
 }
 
@@ -31,8 +31,8 @@ export const GET = async () => {
 
         const allShifts = await db.shift.findMany()
 
-        return NextResponse.json(allShifts, { status: 200 })
+        return NextResponse.json({ data: allShifts, success: true }, { status: 200 })
     } catch (err) {
-        return NextResponse.json({ error: "Something went wrong!" }, { status: 500 })
+        return NextResponse.json({ error: "Something went wrong!", success: false }, { status: 500 })
     }
 }

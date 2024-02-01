@@ -11,7 +11,7 @@ export const POST = async (request) => {
 
         const existUser = await db.user.findUnique({ where: { email } })
 
-        if(existUser) return NextResponse.json({ error: "Email belongs to another account!" }, { status: 409 })
+        if(existUser) return NextResponse.json({ error: "Email belongs to another account!", success: false }, { status: 409 })
 
         const hashed = await hash(password, 10) 
 
@@ -23,8 +23,8 @@ export const POST = async (request) => {
             }
         })
 
-        return NextResponse.json({ message: "User created Successfuly" }, { status: 201 })
+        return NextResponse.json({ message: "User created Successfuly", success: true }, { status: 201 })
     } catch (err) {
-        return NextResponse.json({ error: "Something went wrong!" }, { status: 500 })
+        return NextResponse.json({ error: "Something went wrong!", success: false }, { status: 500 })
     }
 }

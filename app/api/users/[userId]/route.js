@@ -10,7 +10,7 @@ export const GET = async (request, { params: { userId } }) => {
             where: { id: userId }
         })
 
-        if(!user) return NextResponse.json({ error: "User does not exist." }, { status: 404 })
+        if(!user) return NextResponse.json({ error: "User does not exist.", success: false }, { status: 404 })
 
         const foundUser = {
             id: user.id,
@@ -19,9 +19,9 @@ export const GET = async (request, { params: { userId } }) => {
             image: user.image
         }
 
-        return NextResponse.json(foundUser, { status: 200 })
+        return NextResponse.json({ data: foundUser, success: true }, { status: 200 })
     } catch (err) {
-        return NextResponse.json({ error: "Something went wrong!" }, { status: 500 })
+        return NextResponse.json({ error: "Something went wrong!", success: false }, { status: 500 })
     }
 }
 
@@ -35,7 +35,7 @@ export const PUT = async (request, { params: { userId } }) => {
             where: { id: userId }
         })
 
-        if(!user) return NextResponse.json({ error: "User does not exist." }, { status: 404 })
+        if(!user) return NextResponse.json({ error: "User does not exist.", success: false }, { status: 404 })
 
         const updatedUser = await db.user.update({
             data: { ...body },
@@ -48,9 +48,9 @@ export const PUT = async (request, { params: { userId } }) => {
             }
         })
 
-        return NextResponse.json(updatedUser, { status: 200 })
+        return NextResponse.json({ data: updatedUser, success: true }, { status: 200 })
     } catch (err) {
-        return NextResponse.json({ error: "Something went wrong!" }, { status: 500 })
+        return NextResponse.json({ error: "Something went wrong!", success: false }, { status: 500 })
     }
 }
 
@@ -62,14 +62,14 @@ export const DELETE = async (request, { params: { userId } }) => {
             where: { id: userId }
         })
 
-        if(!user) return NextResponse.json({ error: "User does not exist." }, { status: 404 })
+        if(!user) return NextResponse.json({ error: "User does not exist.", success: false }, { status: 404 })
 
         await db.user.delete({
             where: { id: userId }
         })
 
-        return NextResponse.json({message: "User deleted successfuly!" }, { status: 200 })
+        return NextResponse.json({message: "User deleted successfuly!", success: true }, { status: 200 })
     } catch (err) {
-        return NextResponse.json({ error: "Something went wrong!" }, { status: 500 })
+        return NextResponse.json({ error: "Something went wrong!", success: false }, { status: 500 })
     }
 }
