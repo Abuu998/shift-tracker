@@ -48,6 +48,6 @@ export const POST = async (req) => {
 
         return NextResponse.json({ user: returnedUser, message: "Login successful" , success: true }, { status: 200 })
     } catch (err) {
-        return NextResponse.json({ error: "Something went wrong", success: false }, { status: 500 })
+        return NextResponse.json({ error: "Something went wrong", mmessage: err, success: false }, { status: 500 })
     }
 }
