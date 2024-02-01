@@ -19,7 +19,7 @@ export const GET = async (request, { params: { userId } }) => {
             image: user.image
         }
 
-        return NextResponse.json({ data: foundUser, success: true }, { status: 200 })
+        return NextResponse.json({ user: foundUser, success: true }, { status: 200 })
     } catch (err) {
         return NextResponse.json({ error: "Something went wrong!", success: false }, { status: 500 })
     }
@@ -48,7 +48,7 @@ export const PUT = async (request, { params: { userId } }) => {
             }
         })
 
-        return NextResponse.json({ data: updatedUser, success: true }, { status: 200 })
+        return NextResponse.json({ user: updatedUser, success: true }, { status: 200 })
     } catch (err) {
         return NextResponse.json({ error: "Something went wrong!", success: false }, { status: 500 })
     }
@@ -68,7 +68,7 @@ export const DELETE = async (request, { params: { userId } }) => {
             where: { id: userId }
         })
 
-        return NextResponse.json({message: "User deleted successfuly!", success: true }, { status: 200 })
+        return NextResponse.json({ message: "User deleted successfuly!", success: true }, { status: 200 })
     } catch (err) {
         return NextResponse.json({ error: "Something went wrong!", success: false }, { status: 500 })
     }

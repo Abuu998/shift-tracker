@@ -19,7 +19,7 @@ export const POST = async (request) => {
             }
         })
 
-        return NextResponse.json({ data: newShift, success: true }, { status: 201 })
+        return NextResponse.json({ shift: newShift, success: true }, { status: 201 })
     } catch (err) {
         return NextResponse.json({ error: "Something went wrong!", success: false }, { status: 500 })
     }
@@ -31,7 +31,7 @@ export const GET = async () => {
 
         const allShifts = await db.shift.findMany()
 
-        return NextResponse.json({ data: allShifts, success: true }, { status: 200 })
+        return NextResponse.json({ shifts: [...allShifts], success: true }, { status: 200 })
     } catch (err) {
         return NextResponse.json({ error: "Something went wrong!", success: false }, { status: 500 })
     }

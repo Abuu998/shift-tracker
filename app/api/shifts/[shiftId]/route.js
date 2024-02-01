@@ -12,7 +12,7 @@ export const GET = async (request, { params: { shiftId } }) => {
 
         if(!shift) return NextResponse.json({ message: "Shift does not exist.", success: false }, { status: 404 })
 
-        return NextResponse.json({ data: shift, success: true }, { status: 200 })
+        return NextResponse.json({ shift: shift, success: true }, { status: 200 })
     } catch (err) {
         return NextResponse.json({ message: "Something went wrong!", success: false }, { status: 500 })
     }
@@ -35,7 +35,7 @@ export const PUT = async (request, { params: { shiftId } }) => {
             where: { id: shiftId }
         })
 
-        return NextResponse.json({ data: updatedShift, success: true }, { status: 200 })
+        return NextResponse.json({ shift: updatedShift, success: true }, { status: 200 })
     } catch (err) {
         return NextResponse.json({ error: "Something went wrong!", success: false }, { status: 500 })
     }
@@ -55,7 +55,7 @@ export const DELETE = async (request, { params: { shiftId } }) => {
             where: { id: shiftId }
         })
 
-        return NextResponse.json({message: "Shift deleted successfuly!", success: true }, { status: 200 })
+        return NextResponse.json({ message: "Shift deleted successfuly!", success: true }, { status: 200 })
     } catch (err) {
         return NextResponse.json({ error: "Something went wrong!", success: false }, { status: 500 })
     }

@@ -17,7 +17,7 @@ export const GET = async () => {
             select: select
         })
 
-        return NextResponse.json({ data: [...allUsers], success: true }, { status: 200 })
+        return NextResponse.json({ users: [...allUsers], success: true }, { status: 200 })
     } catch (err) {
         return NextResponse.json({ error: "Something went wrong!", success: false }, { status: 500 })
     }

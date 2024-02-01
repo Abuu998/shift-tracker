@@ -2,7 +2,7 @@ import db from "@/prisma";
 import { compare } from "bcrypt";
 import { connectToDb } from "@/utilities/db";
 import { NextResponse } from "next/server";
-import { generateAccessToken, generateRefreshToken } from "@/utilities/utils";
+import { generateAccessToken } from "@/utilities/utils";
 
 export const POST = async (req) => {
     try {
@@ -26,17 +26,6 @@ export const POST = async (req) => {
         }
 
         const accessToken = generateAccessToken(userPayload)
-        // const refreshToken = generateRefreshToken(userPayload)
-
-        // await db.user.update({
-        //     data: {
-        //         ...user,
-        //         refreshToken
-        //     },
-        //     where: {
-        //         email: user.email
-        //     }
-        // })
 
         const returnedUser = {
             id: user.id,

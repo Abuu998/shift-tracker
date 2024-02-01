@@ -10,7 +10,7 @@ export const GET = async (request, { params: { userId } }) => {
             where: { workerId: userId }
         })
 
-        return NextResponse.json({ data: userShifts, success: true }, { status: 200 })
+        return NextResponse.json({ shifts: [...userShifts], success: true }, { status: 200 })
     } catch (err) {
         return NextResponse.json({ error: "Something went wrong!", success: false }, { status: 500 })
     }

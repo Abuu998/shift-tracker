@@ -5,7 +5,7 @@ const refreshSecret = process.env.REFRESH_SECRET
 
 
 export const generateAccessToken = (payload={}) => {
-    return sign(payload, accessSecret, { expiresIn: "20s" })
+    return sign(payload, accessSecret, { expiresIn: 30 })
 }
 
 
