@@ -10,10 +10,13 @@ export const GET = async () => {
             id: true,
             name: true,
             email: true,
-            image: true
+            image: true,
+            refreshToken: true
         }
 
-        const allUsers = await db.user.findMany()
+        const allUsers = await db.user.findMany({
+            select: select
+        })
 
         return NextResponse.json({ data: allUsers, success: true }, { status: 200 })
     } catch (err) {
