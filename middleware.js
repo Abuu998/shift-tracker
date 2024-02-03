@@ -5,7 +5,7 @@ export function middleware(req) {
         return new Response({}, {
             status: 200,
             headers: {
-                'Access-Control-Allow-Origin': `${process.env.ALLOWED_ORIGIN}`,
+                'Access-Control-Allow-Origin': `https://shift-tracker.netlify.app`,
                 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
                 'Access-Control-Allow-Headers': 'Content-Type, Authorization, Accept',
             },
